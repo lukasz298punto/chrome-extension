@@ -1,0 +1,25 @@
+.text-translate {
+    font-weight: 800;
+}
+.container {
+    display: flex;
+}
+.input-translate,
+.button-translate {
+    flex: 1;
+}
+
+.button-translate {
+    width: 100%;
+    margin: 0px;
+    background-color: green;
+    color: white;
+}
+
+.disable-translation {
+    width: auto;
+    color: white;
+    background-color: red;
+    margin: 0px;
+    margin-top: 5px;
+}
