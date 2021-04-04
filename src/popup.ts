@@ -16,6 +16,8 @@ let textTranslate = document.getElementById(
     "textTranslate"
 ) as HTMLParagraphElement;
 
+const defaultLine = ".token-line,pre,h1,a";
+
 disableTranslation.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
@@ -63,7 +65,13 @@ function setTextTranslate() {
 }
 
 function init() {
-    chrome.storage.sync.set({ translate: ".token-line,pre,h1,a" });
+    chrome.storage.sync.get("translate", (data) => {
+        let translate = data.translate;
+
+        chrome.storage.sync.set({
+            translate: translate || defaultLine,
+        });
+    });
     setTextTranslate();
 }
 
