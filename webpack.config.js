@@ -6,7 +6,7 @@ module.exports = {
     entry: {
         popup: path.join(__dirname, "src", "popup.ts"),
     },
-    devtool: "inline-source-map",
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -23,7 +23,11 @@ module.exports = {
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
     },
-    output: { filename: "[name].js", path: path.resolve(__dirname, "dist") },
+    output: {
+        filename: "[name].[contenthash].js",
+        path: path.resolve(__dirname, "dist"),
+        clean: true,
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: "src/popup.html",
@@ -39,5 +43,11 @@ module.exports = {
             ],
         }),
     ],
-    mode: "development",
+    mode: "production",
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+        runtimeChunk: true,
+    },
 };
